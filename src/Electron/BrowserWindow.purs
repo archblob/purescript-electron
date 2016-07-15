@@ -15,12 +15,17 @@ module Electron.BrowserWindow
   , onDidFinishLoad
   , onNewWindow
   , onWillNavigate
+  , onDidNavigate
+  , onDidNavigateInPage
+  , onDidGetRedirectRequest
+  , onDomReady
   ) where
 
 import Prelude (Unit, (>>>))
 import Control.Monad.Eff (Eff)
 import Data.Argonaut.Core (Json())
 import Data.Generic (class Generic)
+import Data.StrMap (StrMap)
 import Electron (ELECTRON)
 import Electron.Options (encodeOptions)
 import Electron.Event (Event)
@@ -110,3 +115,23 @@ foreign import onWillNavigate :: forall eff
    . WebContents
   -> (Event -> String -> Eff (electron :: ELECTRON | eff) Unit)
   -> Eff (electron :: ELECTRON | eff) Unit
+
+foreign import onDidNavigate :: forall eff
+   . WebContents
+  -> (Event -> String -> Eff (electron :: ELECTRON | eff) Unit)
+  -> Eff (electron :: ELECTRON | eff) Unit
+
+foreign import onDidNavigateInPage :: forall eff
+   . WebContents
+  -> (Event -> String -> Eff (electron :: ELECTRON | eff) Unit)
+  -> Eff (electron :: ELECTRON | eff) Unit
+
+foreign import onDidGetRedirectRequest :: forall eff
+   .  WebContents
+   -> (Event -> String -> String -> Boolean -> Int -> String -> String -> StrMap String -> Eff (electron :: ELECTRON | eff) Unit)
+   -> Eff (electron :: ELECTRON | eff) Unit
+
+foreign import onDomReady :: forall eff
+   . WebContents
+   -> (Event -> Eff (electron :: ELECTRON | eff) Unit)
+   -> Eff (electron :: ELECTRON | eff) Unit
