@@ -30,14 +30,14 @@ exports.removeAllListeners = function(channel) {
 }
 
 exports.send = function(channel) {
-  return function(args) {
+  return function(arg) {
     ipcRenderer.send(channel,arg);
     return {};
   };
 }
 
 exports.sendSync = function (channel) {
-  return function(args) {
+  return function(arg) {
     ipcRenderer.sendSync(channel,arg);
     return {};
   };
