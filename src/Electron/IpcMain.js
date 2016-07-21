@@ -4,26 +4,22 @@ const ipcMain = require('electron').ipcMain;
 
 exports.on = function(channel) {
   return function(listener) {
-    ipcMain.on(channel, listener);
-    return {};
+    return ipcMain.on(channel, listener);
   };
 }
 
 exports.once = function(channel) {
   return function(listener) {
-    ipcMain.once(channel, listener);
-    return {};
+    return ipcMain.once(channel, listener);
   }
 }
 
 exports.removeListener = function(channel) {
   return function(listener) {
-    ipcMain.removeListenr(channel, listener);
-    return {};
+    return ipcMain.removeListenr(channel, listener);
   };
 }
 
 exports.removeAllListeners = function(channel) {
-  ipcMain.removeAllListeners(channel);
-  return {};
+  return ipcMain.removeAllListeners(channel);
 }
