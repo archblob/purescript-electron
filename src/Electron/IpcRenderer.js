@@ -5,19 +5,25 @@ const ipcRenderer  = require('electron').ipcRenderer;
 
 exports.on = function(channel) {
   return function(listener) {
-    return ipcRenderer.on(channel,listener);
+    return ipcRenderer.on(channel, function(e,arg){
+      listener(e)(arg)();
+    });
   };
 }
 
 exports.once = function(channel) {
   return function(listener) {
-    return ipcRenderer.once(channel, listener);
+    return ipcRenderer.once(channel, function(e,arg){
+      listener(e)(arg)();
+    });
   };
 }
 
 exports.removeListener = function(channel) {
   return function(listener) {
-    return ipcRenderer.removeListener(channel, listener);
+    return ipcRenderer.removeListener(channel, function(e,arg){
+      listener(e)(arg)();
+    });
   };
 }
 
