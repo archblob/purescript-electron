@@ -26,9 +26,7 @@ exports.once = function(channel) {
 exports.removeListener = function(channel) {
   return function(listener) {
     return function() {
-      return ipcRenderer.removeListener(channel, function(e,arg){
-        listener(e)(arg)();
-      });
+      return ipcRenderer.removeListener(channel, listener);
     };
   };
 }
