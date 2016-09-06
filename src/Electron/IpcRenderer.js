@@ -35,7 +35,13 @@ exports.removeListener = function(channel) {
 
 exports.removeAllListeners = function(channel) {
   return function() {
-    return ipcRenderer.removeAllListener(channel);
+    return ipcRenderer.removeAllListeners(channel);
+  };
+}
+
+exports.removeAllChannelListeners = function() {
+  return function() {
+    return ipcRenderer.removeAllListeners();
   };
 }
 
